@@ -3,6 +3,8 @@
  *
  *  Copyright (c) 2013, SRI International
  *  All rights reserved.
+ *  Copyright (c) 2017, Jonathan Cacace
+ *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
  *  modification, are permitted provided that the following conditions
@@ -32,10 +34,13 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *********************************************************************/
 
-/* Author: Sachin Chitta */
-
-#include <moveit/move_group_interface/move_group.h>
+/* Authors: Sachin Chitta
+						Jonathan Cacace
+*/
+#include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
+
+#include <moveit/move_group_interface/move_group_interface.h>
 
 #include <moveit_msgs/DisplayRobotState.h>
 #include <moveit_msgs/DisplayTrajectory.h>
@@ -62,7 +67,7 @@ int main(int argc, char **argv)
   // The :move_group_interface:`MoveGroup` class can be easily 
   // setup using just the name
   // of the group you would like to control and plan for.
-  moveit::planning_interface::MoveGroup group("arm");
+  moveit::planning_interface::MoveGroupInterface group("arm");
 
   // We will use the :planning_scene_interface:`PlanningSceneInterface`
   // class to deal directly with the world.
@@ -74,7 +79,7 @@ int main(int argc, char **argv)
 
   // Getting Basic Information
   // ^^^^^^^^^^^^^^^^^^^^^^^^^
-  //
+  //	
   // We can print the name of the reference frame for this robot.
   ROS_INFO("Reference frame: %s", group.getPlanningFrame().c_str());
   
@@ -101,14 +106,15 @@ int main(int argc, char **argv)
   // and visualize it.
   // Note that we are just planning, not asking move_group 
   // to actually move the robot.
-  moveit::planning_interface::MoveGroup::Plan my_plan;
+	moveit::planning_interface::MoveGroupInterface::Plan my_plan;
   bool success = group.plan(my_plan);
 
   ROS_INFO("Visualizing plan 1 (pose goal) %s",success?"":"FAILED");    
-  /* Sleep to give Rviz time to visualize the plan. */
+  // Sleep to give Rviz time to visualize the plan. 
   sleep(5.0);
-// END_TUTORIAL
+	// END_TUTORIAL
 
   ros::shutdown();  
-  return 0;
+
+ return 0;
 }

@@ -124,16 +124,16 @@ include_directories(
 
 
 ## Declare a cpp executable
-###add_executable(test_custom_node src/test_custom.cpp)
+add_executable(test_custom_node src/test_custom.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-###add_dependencies(test_custom_node seven_dof_arm_test_generate_messages_cpp)
+add_dependencies(test_custom_node seven_dof_arm_test_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-###target_link_libraries(test_custom_node
-###   ${catkin_LIBRARIES}
-### )
+target_link_libraries(test_custom_node
+   ${catkin_LIBRARIES}
+ )
 
 
 
@@ -152,16 +152,16 @@ include_directories(
 
 
 ## Declare a cpp executable
-###add_executable(add_collision_objct src/add_collision_objct.cpp)
+add_executable(add_collision_objct src/add_collision_objct.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-###add_dependencies(add_collision_objct seven_dof_arm_test_generate_messages_cpp)
+add_dependencies(add_collision_objct seven_dof_arm_test_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-###target_link_libraries(add_collision_objct
-###   ${catkin_LIBRARIES}
-### )
+target_link_libraries(add_collision_objct
+   ${catkin_LIBRARIES}
+ )
 
 
 
