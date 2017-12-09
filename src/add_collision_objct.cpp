@@ -52,6 +52,34 @@ int main(int argc, char **argv)
     // vector, we tell the planning scene to add our new box
     current_scene.addCollisionObjects(collision_objects);
 
+
+		sleep(2);
+
+		
+		moveit_msgs::AttachedCollisionObject attacched_object;
+		attacched_object.link_name = "grasping_frame";
+		attacched_object.object = cylinder;
+		current_scene.applyAttachedCollisionObject( attacched_object );
+
+		sleep(2);
+
+    moveit_msgs::CollisionObject empty;
+		empty.operation = empty.REMOVE;
+		empty.id = "";
+		attacched_object.link_name = "grasping_frame";
+		attacched_object.object = empty;
+		current_scene.applyAttachedCollisionObject( attacched_object );
+
+
+		sleep(2);
+
+	  std::vector<std::string> object_ids;
+    object_ids.push_back("seven_dof_arm_cylinder");
+    current_scene.removeCollisionObjects(object_ids);
+
+
+
+
     ros::shutdown();
 
     return 0;
