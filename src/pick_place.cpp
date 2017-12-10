@@ -29,6 +29,8 @@
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 
+using namespace std;
+
 int main(int argc, char **argv) {
 
 	ros::init(argc, argv, "seven_dof_arm_planner");
@@ -39,6 +41,9 @@ int main(int argc, char **argv) {
 
 	moveit::planning_interface::MoveGroupInterface group("arm");
 	moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
+
+
+	string line;
 
 	//Waiting for scene initialization
 	sleep(2);
@@ -68,27 +73,19 @@ int main(int argc, char **argv) {
 	grasping_object.operation = grasping_object.ADD;
 	grasping_object.header.frame_id = "base_link";
 
-
-	shape_msgs::SolidPrimitive primitive_table;
-	primitive_table.type = primitive.BOX;
-	primitive_table.dimensions.resize(3);
-	primitive_table.dimensions[0] = 0.3;
-	primitive_table.dimensions[1] = 0.5;
-	primitive_table.dimensions[2] = 0.32;
+	primitive.dimensions.resize(3);
+	primitive.dimensions[0] = 0.3;
+	primitive.dimensions[1] = 0.5;
+	primitive.dimensions[2] = 0.32;
 	moveit_msgs::CollisionObject grasping_table;
 	grasping_table.id = "grasping_table";
-	pose.orientation.w = 1.0;
 	pose.position.y =  0.0;
 	pose.position.x =  0.46;
 	pose.position.z =  0.15;
-
-	grasping_table.primitives.push_back(primitive_table);
+	grasping_table.primitives.push_back(primitive);
 	grasping_table.primitive_poses.push_back(pose);
 	grasping_table.operation = grasping_object.ADD;
 	grasping_table.header.frame_id = "base_link";
-
-
-
 	std::vector<moveit_msgs::CollisionObject> collision_objects;
 	collision_objects.push_back(grasping_object);
 	collision_objects.push_back(grasping_table);
@@ -103,29 +100,35 @@ int main(int argc, char **argv) {
 	const robot_state::JointModelGroup *joint_model_group =
   group.getCurrentState()->getJointModelGroup("arm");
 
+
+
+
 	//---approaching
-	geometry_msgs::Pose target_pose1;
-	target_pose1.orientation.x = 0;
-	target_pose1.orientation.y = 0;
-	target_pose1.orientation.z = 0;
-	target_pose1.orientation.w = 1;
-	target_pose1.position.y = 0.0;
-	target_pose1.position.x = 0.32;
-	target_pose1.position.z = 0.35;
-	group.setPoseTarget(target_pose1);
+	geometry_msgs::Pose target_pose;
+	target_pose.orientation.x = 0;
+	target_pose.orientation.y = 0;
+	target_pose.orientation.z = 0;
+	target_pose.orientation.w = 1;
+	target_pose.position.y = 0.0;
+	target_pose.position.x = 0.32;
+	target_pose.position.z = 0.35;
+	group.setPoseTarget(target_pose);
 	group.move();
 	sleep(2);
 
+	cout << "press enter!" << endl;
+	getline(cin, line);
+
 	//---grasping
-	target_pose1.orientation.x = 0;
-	target_pose1.orientation.y = 0;
-	target_pose1.orientation.z = 0;
-	target_pose1.orientation.w = 1;
-	target_pose1.position.y = 0.0;
-	target_pose1.position.x = 0.34;
-	target_pose1.position.z = 0.35;
-	group.setPoseTarget(target_pose1);
+	target_pose.position.y = 0.0;
+	target_pose.position.x = 0.34;
+	target_pose.position.z = 0.35;
+	group.setPoseTarget(target_pose);
 	group.move();
+
+	cout << "press enter!" << endl;
+	getline(cin, line);
+
 
 	//---attach object to the robot
 	moveit_msgs::AttachedCollisionObject attacched_object;
@@ -133,57 +136,62 @@ int main(int argc, char **argv) {
 	attacched_object.object = grasping_object;
 	current_scene.applyAttachedCollisionObject( attacched_object );
 	sleep(2);
+	cout << "press enter!" << endl;
+	getline(cin, line);
+
 
 	//---move far away from the grasping position
-	target_pose1.orientation.x = 0;
-	target_pose1.orientation.y = 0;
-	target_pose1.orientation.z = 0;
-	target_pose1.orientation.w = 1;
-	target_pose1.position.y = 0.0;
-	target_pose1.position.x = 0.34;
-	target_pose1.position.z = 0.4;
-	group.setPoseTarget(target_pose1);
+	target_pose.position.y = 0.0;
+	target_pose.position.x = 0.34;
+	target_pose.position.z = 0.4;
+	group.setPoseTarget(target_pose);
 	group.move();
 	sleep(2);
+	cout << "press enter!" << endl;
+	getline(cin, line);
+
+
 
 	//---picking
-	target_pose1.orientation.x = -1;
-	target_pose1.orientation.y = 0;
-	target_pose1.orientation.z = 0;
-	target_pose1.orientation.w = 0;
-	target_pose1.position.y = -0.1;
-	target_pose1.position.x = 0.34;
-	target_pose1.position.z = 0.4;
-	group.setPoseTarget(target_pose1);
+	target_pose.orientation.x = -1;
+	target_pose.orientation.y = 0;
+	target_pose.orientation.z = 0;
+	target_pose.orientation.w = 0;
+	target_pose.position.y = -0.1;
+	target_pose.position.x = 0.34;
+	target_pose.position.z = 0.4;
+	group.setPoseTarget(target_pose);
 	group.move();
 	//---
 
-	target_pose1.orientation.x = -1;
-	target_pose1.orientation.y = 0;
-	target_pose1.orientation.z = 0;
-	target_pose1.orientation.w = 0;
-	target_pose1.position.y = -0.1;
-	target_pose1.position.x = 0.34;
-	target_pose1.position.z = 0.35;
-	group.setPoseTarget(target_pose1);
+
+	cout << "press enter!" << endl;
+	getline(cin, line);
+
+	target_pose.position.y = -0.1;
+	target_pose.position.x = 0.34;
+	target_pose.position.z = 0.35;
+	group.setPoseTarget(target_pose);
 	group.move();
+
+
+	cout << "press enter!" << endl;
+	getline(cin, line);
 
 	//---remove object from robot's body
 	grasping_object.operation = grasping_object.REMOVE;
 	attacched_object.link_name = "grasping_frame";
 	attacched_object.object = grasping_object;
 	current_scene.applyAttachedCollisionObject( attacched_object );
-
-
-	target_pose1.orientation.x = -1;
-	target_pose1.orientation.y = 0;
-	target_pose1.orientation.z = 0;
-	target_pose1.orientation.w = 0;
-	target_pose1.position.y = -0.1;
-	target_pose1.position.x = 0.32;
-	target_pose1.position.z = 0.35;
-	group.setPoseTarget(target_pose1);
+	target_pose.position.y = -0.1;
+	target_pose.position.x = 0.32;
+	target_pose.position.z = 0.35;
+	group.setPoseTarget(target_pose);
 	group.move();
+
+
+	cout << "press enter!" << endl;
+	getline(cin, line);
 
 	ros::shutdown();
 
