@@ -111,7 +111,7 @@ int main(int argc, char **argv)
 
   ROS_INFO("Visualizing plan 1 (pose goal) %s",success?"":"FAILED");    
   // Sleep to give Rviz time to visualize the plan. 
-  sleep(5.0);
+	group.move();	
 	// END_TUTORIAL
 
   ros::shutdown();  

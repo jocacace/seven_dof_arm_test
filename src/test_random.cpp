@@ -8,7 +8,6 @@ int main(int argc, char **argv)
   ros::AsyncSpinner spinner(1);
   spinner.start();
   // this connecs to a running instance of the move_group node
-  //move_group_interface::MoveGroup group("arm");
 	moveit::planning_interface::MoveGroupInterface group("arm");
   // specify that our target will be a random one
   group.setRandomTarget();

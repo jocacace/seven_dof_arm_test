@@ -135,22 +135,6 @@ target_link_libraries(test_custom_node
    ${catkin_LIBRARIES}
  )
 
-
-
-
-## Declare a cpp executable
-add_executable(find_ee_coordinate src/find_ee_coordinate.cpp)
-
-## Add cmake target dependencies of the executable/library
-## as an example, message headers may need to be generated before nodes
-add_dependencies(find_ee_coordinate seven_dof_arm_test_generate_messages_cpp)
-
-## Specify libraries to link a library or executable target against
-target_link_libraries(find_ee_coordinate
-   ${catkin_LIBRARIES}
- )
-
-
 ## Declare a cpp executable
 add_executable(add_collision_objct src/add_collision_objct.cpp)
 
@@ -188,25 +172,6 @@ add_dependencies(pick_place seven_dof_arm_test_generate_messages_cpp)
 target_link_libraries(pick_place
    ${catkin_LIBRARIES}
 )
-
-
-
-
-
-## Declare a cpp executable
-###add_executable(move_group_plan_group_state src/move_group_plan_group_state.cpp)
-
-## Add cmake target dependencies of the executable/library
-## as an example, message headers may need to be generated before nodes
-###add_dependencies(move_group_plan_group_state seven_dof_arm_test_generate_messages_cpp)
-
-## Specify libraries to link a library or executable target against
-###target_link_libraries(move_group_plan_group_state
-###   ${catkin_LIBRARIES}
-### )
-
-
-
 
 ## Declare a cpp executable
 add_executable(check_collision src/check_collision.cpp)

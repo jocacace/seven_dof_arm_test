@@ -75,6 +75,7 @@ int main(int argc, char **argv)
 	// vector, we tell the planning scene to add our new box
 	current_scene.addCollisionObjects(collision_objects);
 	
+	sleep(4);
 	//---attach object to the robot
 	ROS_INFO("Attaching object grasping_object to robot's body");
 	moveit_msgs::AttachedCollisionObject attacched_object;
