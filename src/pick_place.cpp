@@ -116,9 +116,6 @@ int main(int argc, char **argv) {
 	group.move();
 	sleep(2);
 
-	cout << "press enter!" << endl;
-	getline(cin, line);
-
 	//---grasping
 	target_pose.position.y = 0.0;
 	target_pose.position.x = 0.34;
@@ -126,19 +123,12 @@ int main(int argc, char **argv) {
 	group.setPoseTarget(target_pose);
 	group.move();
 
-	cout << "press enter!" << endl;
-	getline(cin, line);
-
-
 	//---attach object to the robot
 	moveit_msgs::AttachedCollisionObject attacched_object;
 	attacched_object.link_name = "grasping_frame";
 	attacched_object.object = grasping_object;
 	current_scene.applyAttachedCollisionObject( attacched_object );
 	sleep(2);
-	cout << "press enter!" << endl;
-	getline(cin, line);
-
 
 	//---move far away from the grasping position
 	target_pose.position.y = 0.0;
@@ -147,10 +137,6 @@ int main(int argc, char **argv) {
 	group.setPoseTarget(target_pose);
 	group.move();
 	sleep(2);
-	cout << "press enter!" << endl;
-	getline(cin, line);
-
-
 
 	//---picking
 	target_pose.orientation.x = -1;
@@ -163,20 +149,12 @@ int main(int argc, char **argv) {
 	group.setPoseTarget(target_pose);
 	group.move();
 	//---
-
-
-	cout << "press enter!" << endl;
-	getline(cin, line);
-
+	
 	target_pose.position.y = -0.1;
 	target_pose.position.x = 0.34;
 	target_pose.position.z = 0.35;
 	group.setPoseTarget(target_pose);
 	group.move();
-
-
-	cout << "press enter!" << endl;
-	getline(cin, line);
 
 	//---remove object from robot's body
 	grasping_object.operation = grasping_object.REMOVE;
@@ -188,10 +166,6 @@ int main(int argc, char **argv) {
 	target_pose.position.z = 0.35;
 	group.setPoseTarget(target_pose);
 	group.move();
-
-
-	cout << "press enter!" << endl;
-	getline(cin, line);
 
 	ros::shutdown();
 

@@ -136,14 +136,14 @@ target_link_libraries(test_custom_node
  )
 
 ## Declare a cpp executable
-add_executable(add_collision_objct src/add_collision_objct.cpp)
+add_executable(add_collision_object src/add_collision_object.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-add_dependencies(add_collision_objct seven_dof_arm_test_generate_messages_cpp)
+add_dependencies(add_collision_object seven_dof_arm_test_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(add_collision_objct
+target_link_libraries(add_collision_object
    ${catkin_LIBRARIES}
  )
 
