@@ -20,7 +20,15 @@ Improve your motion planning algorithms make the robot able to interact with the
 ### **Installation** 
 Download this package in the _src_ folder of your ROS workspace
 
-```git clone https://github.com/jocacace/ros_matlab_test```
+```git clone https://github.com/jocacace/seven_dof_arm_test```
+
+Compile the package
+
+```catkin_make```
+
+or
+
+```catkin_make -DCATCKIN_WHITELIST_PACKAGES="mastering_ros_demo_pkg"```
 
 
 ### **Get this book** (in pre-order)
