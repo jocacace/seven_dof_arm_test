@@ -28,7 +28,7 @@ Compile the package
 
 or
 
-```catkin_make -DCATCKIN_WHITELIST_PACKAGES="mastering_ros_demo_pkg"```
+```catkin_make -DCATCKIN_WHITELIST_PACKAGES="seven_dof_arm_test"```
 
 
 ### **Get this book** (in pre-order)
